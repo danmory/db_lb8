@@ -1,7 +1,4 @@
 -- Ex. 1, p.1
-
-drop table account;
-
 create table account(
     id serial primary key,
     name varchar(100),
@@ -66,7 +63,7 @@ update account
 update account
     set credit = credit + 500
     where name = 'Account3';
--- rollback  to T1;
+rollback  to T1;
 
 savepoint T2;
 update account
@@ -78,7 +75,7 @@ update account
 update account
     set credit = credit + 30
     where name= 'Account4';
--- rollback  to T2;
+rollback  to T2;
 
 savepoint T3;
 update account
@@ -90,13 +87,13 @@ update account
 update account
     set credit = credit + 30
     where name= 'Account4';
--- rollback to T3;
+rollback to T3;
 
 end transaction ;
 commit;
 
 -- Ex. 2
-drop table ledger;
+-- drop table ledger;
 
 create table ledger(
   id serial primary key,
@@ -122,7 +119,7 @@ insert into ledger("from", "to", fee, amount, transactionDateTime) values ((sele
                                                                            0,
                                                                            500,
                                                                            now());
--- rollback  to T1;
+rollback  to T1;
 
 savepoint T2;
 update account
@@ -139,7 +136,7 @@ insert into ledger("from", "to", fee, amount, transactionDateTime) values ((sele
                                                                            30,
                                                                            700,
                                                                            now());
--- rollback  to T2;
+rollback  to T2;
 
 savepoint T3;
 update account
@@ -156,7 +153,7 @@ insert into ledger("from", "to", fee, amount, transactionDateTime) values ((sele
                                                                            30,
                                                                            100,
                                                                            now());
--- rollback to T3;
+rollback to T3;
 end transaction ;
 commit;
 
